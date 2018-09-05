@@ -108,6 +108,7 @@ public class ChooseAreaFragment extends Fragment {
                 queryCities();
             } else if (currentLevel == LEVEL_CITY) {
                 selectedCity = cityList.get(position);
+                Log.d("test", "queryCounties: ");
                 queryCounties();
             }
         }));
@@ -177,7 +178,7 @@ public class ChooseAreaFragment extends Fragment {
     private void queryCounties() {
         titleText.setText((selectedCity.getCityName()));
         backButton.setVisibility(View.VISIBLE);
-        countyList = LitePal.where("cityid = ?", String.valueOf(selectedCity.getCityCode()))
+        countyList = LitePal.where("cityid = ?", String.valueOf(selectedCity.getId()))
                 .find(County.class);
         if (countyList.size() > 0) {
             dataList.clear();
@@ -235,7 +236,7 @@ public class ChooseAreaFragment extends Fragment {
                         } else if ("city".equals(type)) {
                             queryCities();
                         } else if ("county".equals(type)) {
-                            queryCities();
+                            queryCounties();
                         }
                     });
                 }
